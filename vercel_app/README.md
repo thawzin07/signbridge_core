@@ -1,5 +1,7 @@
 # SignBridge public web demo
 
+Public test URL: [https://signbridge-live-demo.vercel.app/](https://signbridge-live-demo.vercel.app/)
+
 This folder is a separate Vercel target for the selected `best_model.keras` artifact. It serves a minimalist browser UI, keeps the live preview in the browser, and sends one compressed 320×320 JPEG snapshot per inference request to the Python function. Requests are consent-gated in the interface, limited to 1 MB, processed in memory, and never written to disk by this application. The uploaded-photo path uses the same model endpoint.
 
 The Python function uses TensorFlow CPU and the shared `preprocessing.py` contract. Vercel is configured for Python 3.12 and the Singapore region (`sin1`). The dependency bundle is about 1.45 GB uncompressed, so this project needs Vercel Large Functions on Fluid Compute; `VERCEL_SUPPORT_LARGE_FUNCTIONS=1` is configured for the deployment environments. A warm function instance caches one model load; each instance has its own model copy. This is a small class-demo deployment, not a production inference service.

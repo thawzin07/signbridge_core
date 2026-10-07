@@ -107,6 +107,8 @@ Record the computer, camera, model hash, and observed result in `reports/` if th
 
 `vercel_app/` is a separate browser-based demo for public testing. It keeps camera preview local to the browser, then sends compressed still snapshots to a TensorFlow CPU function in the configured Singapore region for inference. A default-off acknowledgement is required before camera or photo inference, and the function processes images in memory without writing image files. Because images leave the browser for prediction, do not test with sensitive photos. The public endpoint is suitable for a small class demonstration; it is not a production service and has no global abuse-prevention layer.
 
+Public test URL: [https://signbridge-live-demo.vercel.app/](https://signbridge-live-demo.vercel.app/)
+
 The web demo reports a four-of-five-frame stable letter and adds characters to the sequence only after a manual click. Its single-image upload uses the same crop and inference path. It does not perform word recognition. Read `vercel_app/README.md` for run and evidence boundaries. A public URL should be called live-camera tested only after manual testing on the intended browser and camera.
 
 ## Optional independent holdout audit
