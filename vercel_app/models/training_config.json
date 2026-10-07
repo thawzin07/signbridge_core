@@ -1,0 +1,20 @@
+{
+  "architecture": "TensorFlow/Keras MobileNetV2, ImageNet pretrained",
+  "input_shape": [
+    160,
+    160,
+    3
+  ],
+  "batch_size": 32,
+  "seed": 20261007,
+  "frozen_head_max_epochs": 30,
+  "fine_tune_max_epochs": 15,
+  "fine_tune_upper_layers": 30,
+  "batch_normalization": "Non-trainable; backbone called with training=False during fine-tuning.",
+  "optimizer_head": "Adam 1e-3",
+  "optimizer_fine_tune": "Adam 1e-5",
+  "wall_clock_budget_seconds": 2700,
+  "validation_rejection_threshold": 0.31,
+  "threshold_selection": "Validation macro-F1 with coverage tie-break; known classes only.",
+  "experimental_without_asl_review": true
+}

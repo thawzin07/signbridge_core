@@ -1,0 +1,9 @@
+# Local Windows GUI environment. Python 3.12 is the verified target for this checkout.
+# TensorFlow runs inference on CPU on native Windows; Colab is the training target.
+tensorflow==2.21.0
+gradio==6.28.0
+mediapipe==0.10.35
+opencv-contrib-python==4.11.0.86
+numpy==1.26.4
+Pillow==11.3.0
+scikit-learn==1.6.1

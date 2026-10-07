@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.vercel/
+.env
+.env.*
+!.env.example
+v/
+venv/
+.venv/
+datasets/
+reports/gui_server_*.log
+*.tmp
+*.part-*
+

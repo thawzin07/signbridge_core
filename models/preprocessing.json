@@ -1,0 +1,38 @@
+{
+  "color_order": "RGB",
+  "orientation": "Apply EXIF orientation before conversion.",
+  "crop": "Use an adjustable square crop. For training, use the full square source image (scale=1, center=0.5,0.5). For GUI inputs, use the same crop rule with user-adjustable scale and center.",
+  "aspect_ratio": "Crop to square; do not stretch the image.",
+  "resize": "Use tf.image.resize to 160x160 with bilinear interpolation and antialias=True.",
+  "input_pixels": "float32 RGB in [0,255] before normalization.",
+  "normalization": "MobileNetV2 preprocessing: pixel / 127.5 - 1.0, yielding [-1,1].",
+  "label_order": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "K",
+    "L",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y"
+  ],
+  "camera_mirroring": "Disabled by default; the captured RGB frame is not flipped.",
+  "image_size": [
+    160,
+    160
+  ],
+  "validation_rejection_threshold": 0.31,
+  "score_interpretation": "Softmax model score; not calibrated certainty."
+}

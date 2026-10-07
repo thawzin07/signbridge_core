@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="A public SignBridge static-letter computer vision demo with live camera and image upload.">
+    <title>SignBridge — Live Letter Demo</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="SignBridge home"><span class="brand-mark">S</span><span>SignBridge</span></a>
+      <span class="topbar-note">Computer vision demo</span>
+    </header>
+
+    <main class="page">
+      <section class="intro">
+        <p class="eyebrow">LIVE MODEL TEST</p>
+        <h1>Try a static hand sign</h1>
+        <p class="lede">Hold one supported handshape in the guide, or upload a photo. The selected MobileNetV2 model returns its three strongest letter scores.</p>
+        <div class="scope-line"><span class="status-dot" id="serviceDot"></span><span id="serviceStatus">Checking model service…</span><span class="scope-divider">·</span><span>20 static letters</span></div>
+      </section>
+
+      <section class="privacy-note" aria-label="Image processing notice">
+        <div class="privacy-icon" aria-hidden="true">i</div>
+        <div class="privacy-copy"><strong>Your image-processing choice</strong><p>For predictions, camera snapshots and uploaded photos are sent to Vercel and processed in memory by this demo. The app does not save them. The service must receive the image to run the model.</p></div>
+        <label class="consent"><input id="consent" type="checkbox"><span>I understand and agree</span></label>
+      </section>
+
+      <section class="workbench">
+        <div class="camera-panel panel">
+          <div class="panel-heading"><div><p class="eyebrow">INPUT</p><h2>Camera or photo</h2></div><span class="live-pill" id="liveState"><span></span> Camera off</span></div>
+          <div class="preview-wrap" id="previewWrap">
+            <video id="video" autoplay playsinline muted aria-label="Live camera preview"></video>
+            <img id="stillPreview" alt="Selected photo preview" hidden>
+            <div class="empty-preview" id="emptyPreview"><div class="camera-glyph" aria-hidden="true">◉</div><strong>Your preview appears here</strong><span>Allow camera use when prompted, or select a photo.</span></div>
+            <div class="crop-guide" id="cropGuide" hidden><span>Place one hand inside</span></div>
+            <div class="preview-shade" id="previewShade" hidden></div>
+          </div>
+          <div class="controls-row">
+            <button class="button button-primary" id="startButton" type="button" disabled>Start camera</button>
+            <button class="button button-secondary" id="stopButton" type="button" disabled>Stop</button>
+            <label class="button button-secondary upload-button" for="imageInput" id="uploadLabel">Choose photo</label>
+            <input id="imageInput" type="file" accept="image/*" hidden>
+          </div>
+          <div class="crop-control"><label for="cropScale">Crop area <span id="cropValue">100%</span></label><input id="cropScale" type="range" min="45" max="100" value="100"><p>Keep the hand large, centered, and fully visible. The preview stays local; only small snapshots are sent for inference.</p></div>
+          <p class="input-status" id="inputStatus" role="status">Agree to image processing to enable testing.</p>
+        </div>
+
+        <aside class="results-column">
+          <section class="result-panel panel" aria-live="polite">
+            <div class="panel-heading"><div><p class="eyebrow">PREDICTION</p><h2>Current letter</h2></div><span class="model-badge">Best model</span></div>
+            <div class="prediction-box" id="predictionBox"><span class="prediction-label" id="predictionLetter">—</span><span class="prediction-state" id="predictionState">Start the camera or choose a photo</span></div>
+            <p class="score-note" id="scoreNote">Top scores show the latest frame. Scores are not calibrated certainty.</p>
+            <div class="top3-heading"><span>Top scores</span><span>softmax</span></div>
+            <div class="top3-list" id="top3List"><div class="top3-empty">Waiting for an image</div></div>
+            <button class="button button-primary add-button" id="addButton" type="button" disabled>Add stable letter to sequence</button>
+            <div class="sequence-row"><label for="sequence">Letter sequence</label><button class="text-button" id="clearSequence" type="button">Clear</button></div>
+            <input id="sequence" class="sequence-input" type="text" autocomplete="off" spellcheck="false" placeholder="Letters you choose to add" aria-label="Manually assembled letter sequence">
+            <p class="sequence-note">Letters are added only when you press the button; frame changes never type automatically.</p>
+          </section>
+
+          <section class="scope-card">
+            <div class="scope-card-title"><span class="small-check" aria-hidden="true">✓</span><strong>What this model covers</strong></div>
+            <p>Static alphabet classes <b>A–I</b>, <b>K–L</b>, <b>O–R</b>, and <b>U–Y</b>. J and Z require motion; words and sentences are not supported.</p>
+            <p class="metric-note">The reported 99.0% accuracy is from the prepared CSV test split. It does not measure webcam accuracy or prove ASL label correctness.</p>
+          </section>
+        </aside>
+      </section>
+
+      <section class="class-strip" aria-label="Supported static classes"><div><p class="eyebrow">SUPPORTED LABELS</p><p>These are the model’s available output classes.</p></div><div class="class-chips" id="classChips"></div></section>
+
+      <footer class="footer"><span>SignBridge Core · MobileNetV2</span><span>Static image classification · not language translation</span></footer>
+    </main>
+  </body>
+</html>
