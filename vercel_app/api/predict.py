@@ -97,19 +97,13 @@ class handler(BaseHTTPRequestHandler):
     """Vercel Python handler. Image bytes are processed in memory and never saved."""
 
     def do_GET(self) -> None:  # noqa: N802 - required by BaseHTTPRequestHandler
-        if self.path.rstrip("/") == "/api/predict":
-            try:
-                get_runtime()
-                _json(self, 200, {"ok": True, "service": "SignBridge inference", "classes": len(CLASSES)})
-            except Exception:
-                _json(self, 503, {"ok": False, "error": "Model service is starting or unavailable."})
-            return
-        _json(self, 404, {"ok": False, "error": "Not found."})
+        try:
+            get_runtime()
+            _json(self, 200, {"ok": True, "service": "SignBridge inference", "classes": len(CLASSES)})
+        except Exception:
+            _json(self, 503, {"ok": False, "error": "Model service is starting or unavailable."})
 
     def do_POST(self) -> None:  # noqa: N802 - required by BaseHTTPRequestHandler
-        if self.path.rstrip("/") != "/api/predict":
-            _json(self, 404, {"ok": False, "error": "Not found."})
-            return
         if self.headers.get("X-SignBridge-Consent") != "1":
             _json(self, 403, {"ok": False, "error": "Please acknowledge the image-processing notice first."})
             return
